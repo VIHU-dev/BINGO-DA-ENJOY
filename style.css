@@ -5,10 +5,10 @@ html, body {
 }
 
 body {
-  background-image: url('A_3D-rendered_digital_illustration_features_bingo_.png'); /* use o mesmo nome do arquivo que você subiu */
+  background-image: url('A_3D-rendered_digital_illustration_features_bingo_.png');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover; /* cobre toda a tela */
+  background-size: cover;
   background-attachment: fixed;
   color: white;
   font-family: Arial, sans-serif;
@@ -83,12 +83,10 @@ button:hover {
   background-color: #e8c12d;
 }
 
-/* CAIXINHA DO RESULTADO */
 #resultado {
   margin-top: 20px;
   font-size: 24px;
   font-weight: bold;
-
   background-color: rgba(249, 211, 66, 0.8);
   color: #222;
   padding: 15px 25px;
@@ -101,7 +99,6 @@ button:hover {
   user-select: none;
 }
 
-/* LISTA DE SORTEADOS */
 #sorteados {
   position: fixed;
   bottom: 20px;
@@ -135,3 +132,4 @@ button:hover {
   border-radius: 8px;
   font-size: 24px;
 }
+
