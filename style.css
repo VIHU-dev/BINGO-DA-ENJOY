@@ -14,18 +14,14 @@ body {
   height: 100%;
 }
 
-/* Estilo chamativo para o título h1 */
+/* Título limpo, elegante e nítido */
 h1 {
   font-size: 3.5rem;
   font-weight: 900;
-  background: linear-gradient(90deg, #f9d342, #ff66cc, #3399ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #cc3366; /* rosa escuro */
   text-shadow:
-    2px 2px 4px rgba(0, 0, 0, 0.7),
-    0 0 10px #f9d342,
-    0 0 20px #ff66cc,
-    0 0 30px #3399ff;
+    1.5px 1.5px 2px #002366; /* sombra azul escuro */
+  -webkit-text-stroke: 1px white; /* contorno branco */
   margin-bottom: 20px;
   user-select: none;
 }
@@ -147,4 +143,3 @@ button:hover {
   border-radius: 8px;
   font-size: 24px;
 }
-
