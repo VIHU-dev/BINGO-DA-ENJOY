@@ -9,7 +9,7 @@ let animacao;
 const tickSound = document.getElementById('tick-sound');
 const winSound = document.getElementById('win-sound');
 
-const sorteados = []; // Lista que agora aceita repetições
+const sorteados = [];
 
 function criarReel() {
     reel.innerHTML = '';
@@ -96,7 +96,7 @@ function alinharResultado() {
     sorteado.classList.add('highlight');
     playWin();
 
-    // Agora adiciona sempre, mesmo se repetir
+    // ADICIONA SEMPRE o símbolo na lista
     sorteados.push(simbolo);
     atualizarSorteados();
 }
@@ -116,11 +116,7 @@ function limparDestaques() {
 
 function atualizarSorteados() {
     const lista = document.getElementById('lista-sorteados');
-    lista.innerHTML = '';
-    sorteados.forEach(simbolo => {
-        const span = document.createElement('span');
-        span.textContent = simbolo;
-        lista.appendChild(span);
-    });
+    const span = document.createElement('span');
+    span.textContent = sorteados[sorteados.length - 1];
+    lista.appendChild(span);
 }
-
