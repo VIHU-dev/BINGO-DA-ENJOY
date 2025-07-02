@@ -79,7 +79,7 @@ function desacelerar() {
 }
 
 function alinharResultado() {
-  const simboloLargura = 160; // 150 + 10
+  const simboloLargura = 160;
   const larguraContainer = 620;
   const centroContainer = larguraContainer / 2;
   const index = Math.round((Math.abs(posicao) + centroContainer - simboloLargura / 2) / simboloLargura) % reel.children.length;
