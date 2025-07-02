@@ -5,7 +5,7 @@ html, body {
 }
 
 body {
-  background: linear-gradient(135deg, #ff66cc, #3399ff);
+  background: linear-gradient(135deg, #004e92, #f9d342);
   /* ou, se quiser azul mais escuro: */
   /* background: linear-gradient(135deg, #004e92, #f9d342); */
   color: white;
