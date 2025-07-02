@@ -10,6 +10,8 @@ let animacao;
 const tickSound = document.getElementById('tick-sound');
 const winSound = document.getElementById('win-sound');
 
+const sorteados = []; // <- NOVO
+
 function criarReel() {
     reel.innerHTML = '';
     const sequencia = [];
@@ -82,20 +84,24 @@ function alinharResultado() {
     const larguraContainer = 620;
     const centroContainer = larguraContainer / 2;
 
-    // Calcula o índice do símbolo que está no centro da roleta
     const index = Math.round((Math.abs(posicao) + centroContainer - simboloLargura / 2) / simboloLargura) % reel.children.length;
 
-    // Ajusta a posição da roleta para centralizar esse símbolo exatamente sob a seta
     posicao = -(index * simboloLargura - centroContainer + simboloLargura / 2);
     reel.style.transform = `translateX(${posicao}px)`;
 
-    // Exibe o resultado
     const sorteado = reel.children[index];
-    document.getElementById('resultado').innerHTML = `Resultado: ${sorteado.innerText}`;
+    const simbolo = sorteado.innerText;
 
-    // Destaque e som
+    document.getElementById('resultado').innerHTML = `Resultado: ${simbolo}`;
+
     sorteado.classList.add('highlight');
     playWin();
+
+    // Adiciona à lista de sorteados se for novo
+    if (!sorteados.includes(simbolo)) {
+        sorteados.push(simbolo);
+        atualizarSorteados();
+    }
 }
 
 function playTick() {
@@ -109,4 +115,14 @@ function playWin() {
 
 function limparDestaques() {
     document.querySelectorAll('.symbol').forEach(el => el.classList.remove('highlight'));
+}
+
+function atualizarSorteados() {
+    const lista = document.getElementById('lista-sorteados');
+    lista.innerHTML = '';
+    sorteados.forEach(simbolo => {
+        const span = document.createElement('span');
+        span.textContent = simbolo;
+        lista.appendChild(span);
+    });
 }
