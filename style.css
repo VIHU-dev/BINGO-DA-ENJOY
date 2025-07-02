@@ -5,11 +5,8 @@ html, body {
 }
 
 body {
-background-image: url('https://wallpapers.com/images/featured/imagens-de-bingo-wqc583urzj7oe9g1.jpg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  background-attachment: fixed;
+  background: linear-gradient(135deg, #ff66cc, #3399ff);
+  /* Removi o background-image antigo */
   color: white;
   font-family: Arial, sans-serif;
   text-align: center;
