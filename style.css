@@ -13,6 +13,23 @@ body {
   padding: 0;
   height: 100%;
 }
+
+/* Estilo chamativo para o título h1 */
+h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #f9d342, #ff66cc, #3399ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.7),
+    0 0 10px #f9d342,
+    0 0 20px #ff66cc,
+    0 0 30px #3399ff;
+  margin-bottom: 20px;
+  user-select: none;
+}
+
 .seta {
   width: 0;
   height: 0;
@@ -130,3 +147,4 @@ button:hover {
   border-radius: 8px;
   font-size: 24px;
 }
+
