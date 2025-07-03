@@ -34,7 +34,7 @@ const reel = document.getElementById('reel');
 const tickSound = document.getElementById('tick-sound');
 const winSound = document.getElementById('win-sound');
 const roletaSound = document.getElementById('roleta-sound');
-const seta = document.querySelector('.seta');
+const seta = document.getElementById('seta');
 
 let rodando = false;
 let posicao = 0;
@@ -46,16 +46,16 @@ function criarReel() {
   const sequencia = [];
 
   for (let i = 0; i < 50; i++) {
-    const randomIndex = Math.floor(Math.random() * simbolos.length);
-    sequencia.push(simbolos[randomIndex]);
+    const random = Math.floor(Math.random() * simbolos.length);
+    sequencia.push(simbolos[random]);
   }
 
-  sequencia.forEach(simboloObj => {
+  sequencia.forEach(item => {
     const div = document.createElement('div');
     div.classList.add('symbol');
     const img = document.createElement('img');
-    img.src = simboloObj.src;
-    img.alt = simboloObj.nome;
+    img.src = item.src;
+    img.alt = item.nome;
     img.classList.add('icon-img');
     div.appendChild(img);
     reel.appendChild(div);
@@ -76,7 +76,7 @@ function girar() {
 
 function animar() {
   posicao -= velocidade;
-  const larguraReel = (150 + 10) * reel.children.length;
+  const larguraReel = (160) * reel.children.length;
 
   if (Math.abs(posicao) >= larguraReel) {
     posicao = 0;
@@ -103,7 +103,7 @@ function desacelerar() {
     velocidade *= 0.95;
     posicao -= velocidade;
 
-    const larguraReel = (150 + 10) * reel.children.length;
+    const larguraReel = 160 * reel.children.length;
     if (Math.abs(posicao) >= larguraReel) {
       posicao = 0;
     }
@@ -118,8 +118,7 @@ function desacelerar() {
 
 function alinharResultado() {
   const simboloLargura = 160;
-  const larguraContainer = 620;
-  const centroContainer = larguraContainer / 2;
+  const centroContainer = 620 / 2;
   const index = Math.round((Math.abs(posicao) + centroContainer - simboloLargura / 2) / simboloLargura) % reel.children.length;
 
   posicao = -(index * simboloLargura - centroContainer + simboloLargura / 2);
