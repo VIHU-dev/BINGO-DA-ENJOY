@@ -50,6 +50,7 @@ h1 {
   filter: drop-shadow(0 0 6px #ff4df8);
 }
 
+/* EFEITO 3D */
 .slot-machine {
   display: flex;
   overflow: hidden;
@@ -61,14 +62,16 @@ h1 {
   background: rgba(0, 0, 0, 0.6);
   position: relative;
   box-shadow: 0 0 20px #ff4df8;
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
 .reel {
   display: flex;
   transition: transform 0.3s ease-out;
+  transform-style: preserve-3d;
 }
 
-/* Cada símbolo é uma imagem agora */
 .symbol {
   width: 150px;
   height: 150px;
@@ -83,12 +86,29 @@ h1 {
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
+  transform: rotateY(0deg);
+  transition: transform 0.3s ease;
 }
 
+/* Imagens dentro dos símbolos */
 .icon-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+/* Efeito 3D ao girar */
+.symbol.spin-3d {
+  animation: spin3D 0.5s linear infinite;
+}
+
+@keyframes spin3D {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
 
 .symbol.highlight {
@@ -170,4 +190,3 @@ button:hover {
   font-size: 16px;
   font-weight: bold;
 }
-
