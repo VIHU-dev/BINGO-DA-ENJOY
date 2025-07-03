@@ -19,12 +19,29 @@ body {
 h1 {
   font-size: 3.5rem;
   font-weight: 900;
-  color: #cc3366; /* rosa escuro */
-  text-shadow:
-    1.5px 1.5px 2px #002366; /* sombra azul escuro */
-  -webkit-text-stroke: 1px white; /* contorno branco */
-  margin-bottom: 20px;
+  color: #fff;
+  position: relative;
   user-select: none;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow:
+    0 0 5px #00aaff,
+    0 0 10px #00aaff,
+    0 0 20px #00aaff,
+    0 0 30px #0099ff,
+    0 0 40px #0099ff,
+    0 0 50px #0077cc,
+    0 0 60px #0077cc;
+  animation: flicker 3s infinite alternate;
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.7;
+  }
 }
 
 .seta {
