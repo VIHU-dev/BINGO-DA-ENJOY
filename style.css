@@ -4,16 +4,26 @@ html, body {
   padding: 0;
 }
 
-body {
-  background-image: url('Imagem do WhatsApp de 2025-07-02 à(s) 22.53.14_c44de70a.jpg');
-  /* ou direto se estiver na raiz: */
-  /* background-image: url('fundo.jpg'); */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
-/* Título limpo, elegante e nítido */
+
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('fundo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 h1 {
   font-size: 3.5rem;
   font-weight: bold;
@@ -39,6 +49,8 @@ h1 {
     opacity: 0.75;
   }
 }
+
+/* Resto do seu CSS abaixo (slot, botão, sorteados...) */
 
 .seta {
   width: 0;
