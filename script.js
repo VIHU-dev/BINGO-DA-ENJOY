@@ -1,4 +1,6 @@
 const simbolos = ['🍒', '⭐', '🍇', '🍉', '🔔', '7️⃣', '💎'];
+let disponiveis = [...simbolos]; // símbolos disponíveis para sorteio
+
 const reel = document.getElementById('reel');
 const tickSound = document.getElementById('tick-sound');
 const winSound = document.getElementById('win-sound');
@@ -8,13 +10,14 @@ let rodando = false;
 let posicao = 0;
 let velocidade = 0;
 let animacao;
+let simboloSorteado = null;
 
 function criarReel() {
   reel.innerHTML = '';
   const sequencia = [];
 
   for (let i = 0; i < 50; i++) {
-    const simbolo = simbolos[Math.floor(Math.random() * simbolos.length)];
+    const simbolo = disponiveis[Math.floor(Math.random() * disponiveis.length)];
     sequencia.push(simbolo);
   }
 
@@ -28,6 +31,11 @@ function criarReel() {
 
 function girar() {
   if (rodando) return;
+  if (disponiveis.length === 0) {
+    alert("Todos os símbolos já foram sorteados!");
+    return;
+  }
+
   rodando = true;
   criarReel();
   limparDestaques();
@@ -88,9 +96,21 @@ function alinharResultado() {
   reel.style.transform = `translateX(${posicao}px)`;
 
   const sorteado = reel.children[index];
-  document.getElementById('resultado').innerHTML = `Resultado: ${sorteado.innerText}`;
+
+  // Verifica se já foi sorteado
+  simboloSorteado = sorteado.innerText;
+  if (!disponiveis.includes(simboloSorteado)) {
+    document.getElementById('resultado').innerText = `⚠️ Repetido! Gire novamente.`;
+    sorteado.classList.add('highlight');
+    return;
+  }
+
+  // Remove da lista de disponíveis
+  disponiveis = disponiveis.filter(s => s !== simboloSorteado);
+
+  document.getElementById('resultado').innerHTML = `Resultado: ${simboloSorteado}`;
   sorteado.classList.add('highlight');
-  adicionarSorteado(sorteado.innerText);
+  adicionarSorteado(simboloSorteado);
   playWin();
 }
 
