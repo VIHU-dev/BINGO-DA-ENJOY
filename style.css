@@ -5,9 +5,8 @@ html, body {
 }
 
 body {
- body {
   background: linear-gradient(135deg, #8B004B, #001844);
-  /* rosa bem escuro (#8B004B) para azul bem escuro (#001844) */
+  /* rosa bem escuro para azul bem escuro */
   color: white;
   font-family: Arial, sans-serif;
   text-align: center;
@@ -15,6 +14,7 @@ body {
   padding: 0;
   height: 100%;
 }
+
 /* Título limpo, elegante e nítido */
 h1 {
   font-size: 3.5rem;
