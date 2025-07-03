@@ -34,7 +34,7 @@ function criarReel() {
     const div = document.createElement('div');
     div.classList.add('symbol');
     const img = document.createElement('img');
-    img.src = `imgs/${simbolo}.jpg`;
+    img.src = `imgs/${simbolo.replace(/ /g, '_')}.jpg`;
     img.classList.add('icon-img');
     div.appendChild(img);
     reel.appendChild(div);
@@ -106,7 +106,7 @@ function alinharResultado() {
 
   const sorteado = reel.children[index];
   const imgSrc = sorteado.querySelector('img').src;
-  const nome = imgSrc.substring(imgSrc.lastIndexOf('/') + 1, imgSrc.lastIndexOf('.'));
+  const nome = imgSrc.substring(imgSrc.lastIndexOf('/') + 1, imgSrc.lastIndexOf('.')).replace(/_/g, ' ');
 
   if (!jaSorteados.includes(nome)) {
     jaSorteados.push(nome);
