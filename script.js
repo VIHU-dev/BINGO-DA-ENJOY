@@ -1,5 +1,34 @@
-const simbolos = ['🍒', '⭐', '🍇', '🍉', '🔔', '7️⃣', '💎'];
-let disponiveis = [...simbolos]; // símbolos disponíveis para sorteio
+const simbolos = [
+  { src: 'img/blouse.jpg', nome: 'Blouse' },
+  { src: 'img/bow_tie.jpg', nome: 'Bow Tie' },
+  { src: 'img/boxers.jpg', nome: 'Boxers' },
+  { src: 'img/bra.jpg', nome: 'Bra' },
+  { src: 'img/cap.jpg', nome: 'Cap' },
+  { src: 'img/coat.jpg', nome: 'Coat' },
+  { src: 'img/gloves.jpg', nome: 'Gloves' },
+  { src: 'img/hat.jpg', nome: 'Hat' },
+  { src: 'img/hoodie.jpg', nome: 'Hoodie' },
+  { src: 'img/jacket.jpg', nome: 'Jacket' },
+  { src: 'img/jeans.jpg', nome: 'Jeans' },
+  { src: 'img/leggings.jpg', nome: 'Leggings' },
+  { src: 'img/overalls.jpg', nome: 'Overalls' },
+  { src: 'img/pajamas.jpg', nome: 'Pajamas' },
+  { src: 'img/panties.jpg', nome: 'Panties' },
+  { src: 'img/pants.jpg', nome: 'Pants' },
+  { src: 'img/scarf.jpg', nome: 'Scarf' },
+  { src: 'img/shirt.jpg', nome: 'Shirt' },
+  { src: 'img/shorts.jpg', nome: 'Shorts' },
+  { src: 'img/skirt.jpg', nome: 'Skirt' },
+  { src: 'img/socks.jpg', nome: 'Socks' },
+  { src: 'img/stockings.jpg', nome: 'Stockings' },
+  { src: 'img/suit.jpg', nome: 'Suit' },
+  { src: 'img/sweater.jpg', nome: 'Sweater' },
+  { src: 'img/swimsuit.jpg', nome: 'Swimsuit' },
+  { src: 'img/tie.jpg', nome: 'Tie' },
+  { src: 'img/t_shirt.jpg', nome: 'T-Shirt' },
+  { src: 'img/underwear.jpg', nome: 'Underwear' },
+  { src: 'img/vest.jpg', nome: 'Vest' }
+];
 
 const reel = document.getElementById('reel');
 const tickSound = document.getElementById('tick-sound');
@@ -10,13 +39,16 @@ let rodando = false;
 let posicao = 0;
 let velocidade = 0;
 let animacao;
-let simboloSorteado = null;
+let simbolosSorteados = [];
 
 function criarReel() {
   reel.innerHTML = '';
   const sequencia = [];
 
   for (let i = 0; i < 50; i++) {
+    const disponiveis = simbolos.filter(s => !simbolosSorteados.includes(s.nome));
+    if (disponiveis.length === 0) break;
+
     const simbolo = disponiveis[Math.floor(Math.random() * disponiveis.length)];
     sequencia.push(simbolo);
   }
@@ -24,14 +56,21 @@ function criarReel() {
   sequencia.forEach(simbolo => {
     const div = document.createElement('div');
     div.classList.add('symbol');
-    div.innerText = simbolo;
+
+    const img = document.createElement('img');
+    img.src = simbolo.src;
+    img.alt = simbolo.nome;
+    img.dataset.nome = simbolo.nome;
+    img.classList.add('icon-img');
+
+    div.appendChild(img);
     reel.appendChild(div);
   });
 }
 
 function girar() {
   if (rodando) return;
-  if (disponiveis.length === 0) {
+  if (simbolosSorteados.length >= simbolos.length) {
     alert("Todos os símbolos já foram sorteados!");
     return;
   }
@@ -96,27 +135,23 @@ function alinharResultado() {
   reel.style.transform = `translateX(${posicao}px)`;
 
   const sorteado = reel.children[index];
+  const img = sorteado.querySelector('img');
+  const nome = img?.dataset.nome || '???';
 
-  // Verifica se já foi sorteado
-  simboloSorteado = sorteado.innerText;
-  if (!disponiveis.includes(simboloSorteado)) {
-    document.getElementById('resultado').innerText = `⚠️ Repetido! Gire novamente.`;
-    sorteado.classList.add('highlight');
-    return;
+  document.getElementById('resultado').innerHTML = `Resultado: ${nome}`;
+  sorteado.classList.add('highlight');
+
+  if (!simbolosSorteados.includes(nome)) {
+    simbolosSorteados.push(nome);
+    adicionarSorteado(nome);
   }
 
-  // Remove da lista de disponíveis
-  disponiveis = disponiveis.filter(s => s !== simboloSorteado);
-
-  document.getElementById('resultado').innerHTML = `Resultado: ${simboloSorteado}`;
-  sorteado.classList.add('highlight');
-  adicionarSorteado(simboloSorteado);
   playWin();
 }
 
-function adicionarSorteado(simbolo) {
+function adicionarSorteado(nome) {
   const span = document.createElement('span');
-  span.textContent = simbolo;
+  span.textContent = nome;
   document.getElementById('lista-sorteados').appendChild(span);
 }
 
