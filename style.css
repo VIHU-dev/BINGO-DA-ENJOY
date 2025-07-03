@@ -27,17 +27,17 @@ body {
 h1 {
   font-size: 3.5rem;
   font-weight: bold;
-  color: #ff4da6; /* rosa vibrante */
+  color: #ffffff; /* letras brancas */
   text-transform: uppercase;
   letter-spacing: 5px;
   user-select: none;
   text-shadow:
-    0 0 5px #00aaff,
-    0 0 10px #00aaff,
-    0 0 15px #00ccff,
-    0 0 20px #33ccff,
-    0 0 30px #66e0ff,
-    0 0 40px #99eeff;
+    0 0 5px #ff4da6,
+    0 0 10px #ff4da6,
+    0 0 15px #ff3399,
+    0 0 20px #ff1a8c,
+    0 0 30px #cc0077,
+    0 0 40px #990055;
   animation: flicker 2.5s infinite alternate;
 }
 
