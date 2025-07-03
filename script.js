@@ -1,80 +1,48 @@
+// === SCRIPT COMPLETO PARA BINGO COM SETA GIRANDO ===
 const simbolos = [
-  { src: 'img/blouse.jpg', nome: 'Blouse' },
-  { src: 'img/bow_tie.jpg', nome: 'Bow Tie' },
-  { src: 'img/boxers.jpg', nome: 'Boxers' },
-  { src: 'img/bra.jpg', nome: 'Bra' },
-  { src: 'img/cap.jpg', nome: 'Cap' },
-  { src: 'img/coat.jpg', nome: 'Coat' },
-  { src: 'img/gloves.jpg', nome: 'Gloves' },
-  { src: 'img/hat.jpg', nome: 'Hat' },
-  { src: 'img/hoodie.jpg', nome: 'Hoodie' },
-  { src: 'img/jacket.jpg', nome: 'Jacket' },
-  { src: 'img/jeans.jpg', nome: 'Jeans' },
-  { src: 'img/leggings.jpg', nome: 'Leggings' },
-  { src: 'img/overalls.jpg', nome: 'Overalls' },
-  { src: 'img/pajamas.jpg', nome: 'Pajamas' },
-  { src: 'img/panties.jpg', nome: 'Panties' },
-  { src: 'img/pants.jpg', nome: 'Pants' },
-  { src: 'img/scarf.jpg', nome: 'Scarf' },
-  { src: 'img/shirt.jpg', nome: 'Shirt' },
-  { src: 'img/shorts.jpg', nome: 'Shorts' },
-  { src: 'img/skirt.jpg', nome: 'Skirt' },
-  { src: 'img/socks.jpg', nome: 'Socks' },
-  { src: 'img/stockings.jpg', nome: 'Stockings' },
-  { src: 'img/suit.jpg', nome: 'Suit' },
-  { src: 'img/sweater.jpg', nome: 'Sweater' },
-  { src: 'img/swimsuit.jpg', nome: 'Swimsuit' },
-  { src: 'img/tie.jpg', nome: 'Tie' },
-  { src: 'img/t_shirt.jpg', nome: 'T-Shirt' },
-  { src: 'img/underwear.jpg', nome: 'Underwear' },
-  { src: 'img/vest.jpg', nome: 'Vest' }
+  'blouse', 'bow tie', 'boxers', 'bra', 'cap', 'coat', 'gloves', 'hat',
+  'hoodie', 'jacket', 'jeans', 'leggings', 'overalls', 'pajamas', 'panties',
+  'pants', 'scarf', 'shirt', 'shorts', 'skirt', 'socks', 'stokings', 'suit',
+  'sweater', 'swimsuit', 'tie', 't-shirt', 'undewear', 'vest'
 ];
 
 const reel = document.getElementById('reel');
 const tickSound = document.getElementById('tick-sound');
 const winSound = document.getElementById('win-sound');
 const roletaSound = document.getElementById('roleta-sound');
+const seta = document.querySelector('.seta');
 
 let rodando = false;
 let posicao = 0;
 let velocidade = 0;
 let animacao;
-let simbolosSorteados = [];
+const jaSorteados = [];
 
 function criarReel() {
   reel.innerHTML = '';
   const sequencia = [];
 
   for (let i = 0; i < 50; i++) {
-    const disponiveis = simbolos.filter(s => !simbolosSorteados.includes(s.nome));
-    if (disponiveis.length === 0) break;
-
-    const simbolo = disponiveis[Math.floor(Math.random() * disponiveis.length)];
+    let simbolo;
+    do {
+      simbolo = simbolos[Math.floor(Math.random() * simbolos.length)];
+    } while (jaSorteados.includes(simbolo) && jaSorteados.length < simbolos.length);
     sequencia.push(simbolo);
   }
 
   sequencia.forEach(simbolo => {
     const div = document.createElement('div');
     div.classList.add('symbol');
-
     const img = document.createElement('img');
-    img.src = simbolo.src;
-    img.alt = simbolo.nome;
-    img.dataset.nome = simbolo.nome;
+    img.src = `imgs/${simbolo}.jpg`;
     img.classList.add('icon-img');
-
     div.appendChild(img);
     reel.appendChild(div);
   });
 }
 
 function girar() {
-  if (rodando) return;
-  if (simbolosSorteados.length >= simbolos.length) {
-    alert("Todos os símbolos já foram sorteados!");
-    return;
-  }
-
+  if (rodando || jaSorteados.length === simbolos.length) return;
   rodando = true;
   criarReel();
   limparDestaques();
@@ -82,6 +50,7 @@ function girar() {
   velocidade = 50;
   animar();
   playRoletaSound();
+  seta.classList.add('girando');
 }
 
 function animar() {
@@ -122,6 +91,7 @@ function desacelerar() {
     requestAnimationFrame(desacelerar);
   } else {
     alinharResultado();
+    seta.classList.remove('girando');
   }
 }
 
@@ -135,17 +105,16 @@ function alinharResultado() {
   reel.style.transform = `translateX(${posicao}px)`;
 
   const sorteado = reel.children[index];
-  const img = sorteado.querySelector('img');
-  const nome = img?.dataset.nome || '???';
+  const imgSrc = sorteado.querySelector('img').src;
+  const nome = imgSrc.substring(imgSrc.lastIndexOf('/') + 1, imgSrc.lastIndexOf('.'));
+
+  if (!jaSorteados.includes(nome)) {
+    jaSorteados.push(nome);
+  }
 
   document.getElementById('resultado').innerHTML = `Resultado: ${nome}`;
   sorteado.classList.add('highlight');
-
-  if (!simbolosSorteados.includes(nome)) {
-    simbolosSorteados.push(nome);
-    adicionarSorteado(nome);
-  }
-
+  adicionarSorteado(nome);
   playWin();
 }
 
