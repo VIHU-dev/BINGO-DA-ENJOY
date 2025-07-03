@@ -1,88 +1,84 @@
-/* === ESTILO GERAL === */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-}
-
-body {
-  background-image: url('fundo.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #360033, #0b8793);
   color: white;
-  font-family: 'Orbitron', sans-serif;
   text-align: center;
 }
 
-/* === TÍTULO COM BRILHO === */
 h1 {
   font-size: 3.5rem;
   font-weight: bold;
-  color: #fff;
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 5px;
   user-select: none;
   text-shadow:
-    0 0 5px #ff4df8,
-    0 0 10px #ff4df8,
-    0 0 20px #ff4df8,
-    0 0 40px #00aaff,
-    0 0 60px #00aaff;
-  animation: flicker 2.5s infinite alternate;
+    0 0 5px #ff4da6,
+    0 0 10px #ff4da6,
+    0 0 15px #ff4da6,
+    0 0 20px #ff4da6,
+    0 0 25px #8a2be2;
+  animation: flicker 2s infinite alternate;
 }
 
 @keyframes flicker {
-  0%, 18%, 22%, 25%, 55%, 100% { opacity: 1; }
-  20%, 24%, 54% { opacity: 0.7; }
+  0%, 18%, 22%, 25%, 55%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 54% {
+    opacity: 0.7;
+  }
 }
 
-/* === SETA === */
+.slot-wrapper {
+  position: relative;
+  width: 620px;
+  margin: 0 auto;
+}
+
 .seta {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 30px solid #ff4df8;
-  margin: 20px auto 0 auto;
-  position: relative;
-  top: 20px;
-  filter: drop-shadow(0 0 6px #ff4df8);
-  transform-origin: bottom center;
-  transition: transform 0.4s ease-in-out;
+  border-bottom: 30px solid #ff4da6;
+  z-index: 10;
+  transition: transform 0.2s ease;
 }
 
 .seta.girando {
-  animation: tremor 0.2s infinite alternate;
-  transform: rotateZ(-25deg);
+  animation: tremor 0.3s infinite alternate;
+  transform-origin: 50% 100%;
 }
 
 @keyframes tremor {
-  0% { transform: rotateZ(-25deg); }
-  50% { transform: rotateZ(-28deg); }
-  100% { transform: rotateZ(-22deg); }
+  0% { transform: translateX(-50%) rotate(-10deg); }
+  50% { transform: translateX(-50%) rotate(-20deg); }
+  100% { transform: translateX(-50%) rotate(-10deg); }
 }
 
-/* === SLOT COM EFEITO 3D === */
 .slot-machine {
   display: flex;
   overflow: hidden;
   width: 620px;
   height: 160px;
-  border: 8px solid #ff4df8;
+  border: 8px solid #ff4da6;
   border-radius: 20px;
   margin: 20px auto;
-  background: rgba(0, 0, 0, 0.6);
+  background: #222;
   position: relative;
-  box-shadow: 0 0 20px #ff4df8;
-  perspective: 1000px;
-  transform-style: preserve-3d;
 }
 
 .reel {
   display: flex;
   transition: transform 0.3s ease-out;
-  transform-style: preserve-3d;
 }
 
 .symbol {
@@ -95,32 +91,14 @@ h1 {
   color: #222;
   margin: 0 5px;
   border-radius: 10px;
-  border: 4px solid #ff4df8;
+  border: 4px solid #ff4da6;
   box-sizing: border-box;
   overflow: hidden;
-  position: relative;
-  transform: rotateY(0deg);
-  transition: transform 0.3s ease;
-}
-
-.icon-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.symbol.spin-3d {
-  animation: spin3D 0.5s linear infinite;
-}
-
-@keyframes spin3D {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
 }
 
 .symbol.highlight {
-  border-color: #ff80ff;
-  box-shadow: 0 0 25px #ff80ff;
+  border-color: #ffd700;
+  box-shadow: 0 0 20px #ffd700;
   animation: blink 0.8s infinite;
 }
 
@@ -129,34 +107,39 @@ h1 {
   50% { opacity: 0.3; }
 }
 
+.icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 button {
   padding: 10px 20px;
   font-size: 18px;
   cursor: pointer;
-  background-color: #ff4df8;
+  background-color: #ff4da6;
   border: none;
   border-radius: 5px;
   color: #fff;
   transition: background-color 0.3s;
   margin: 5px;
-  box-shadow: 0 0 10px #ff4df8;
 }
 
 button:hover {
-  background-color: #e03dd6;
+  background-color: #e74396;
 }
 
 #resultado {
   margin-top: 20px;
   font-size: 24px;
   font-weight: bold;
-  background-color: rgba(255, 77, 248, 0.9);
-  color: #fff;
+  background-color: rgba(255, 77, 166, 0.8);
+  color: white;
   padding: 15px 25px;
   border-radius: 12px;
-  border: 3px solid #ff4df8;
+  border: 3px solid #ff4da6;
   display: inline-block;
-  box-shadow: 0 0 15px #ff4df8;
+  box-shadow: 0 0 15px #ff4da6;
   min-width: 220px;
   text-align: center;
   user-select: none;
@@ -166,21 +149,20 @@ button:hover {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: rgba(34, 34, 34, 0.9);
+  background-color: rgba(34, 34, 34, 0.8);
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #ff4df8;
-  max-width: 220px;
+  border: 2px solid #ff4da6;
+  max-width: 200px;
   color: white;
   font-size: 18px;
   text-align: left;
-  box-shadow: 0 0 10px #ff4df8;
 }
 
 #sorteados h3 {
   margin: 0 0 10px;
   font-size: 20px;
-  color: #ff4df8;
+  color: #ff4da6;
 }
 
 #lista-sorteados {
@@ -194,6 +176,5 @@ button:hover {
   color: #222;
   padding: 5px 10px;
   border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 18px;
 }
