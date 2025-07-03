@@ -1,4 +1,4 @@
-const simbolos = [
+const simbolosOriginais = [
   { src: 'img/blouse.jpg', nome: 'Blouse' },
   { src: 'img/bow_tie.jpg', nome: 'Bow Tie' },
   { src: 'img/boxers.jpg', nome: 'Boxers' },
@@ -30,6 +30,8 @@ const simbolos = [
   { src: 'img/vest.jpg', nome: 'Vest' }
 ];
 
+let simbolosDisponiveis = [...simbolosOriginais];
+
 const reel = document.getElementById('reel');
 const tickSound = document.getElementById('tick-sound');
 const winSound = document.getElementById('win-sound');
@@ -45,9 +47,14 @@ function criarReel() {
   reel.innerHTML = '';
   const sequencia = [];
 
+  if (simbolosDisponiveis.length === 0) {
+    alert('Todos os itens já foram sorteados!');
+    return;
+  }
+
   for (let i = 0; i < 50; i++) {
-    const random = Math.floor(Math.random() * simbolos.length);
-    sequencia.push(simbolos[random]);
+    const random = Math.floor(Math.random() * simbolosDisponiveis.length);
+    sequencia.push(simbolosDisponiveis[random]);
   }
 
   sequencia.forEach(item => {
@@ -63,7 +70,7 @@ function criarReel() {
 }
 
 function girar() {
-  if (rodando) return;
+  if (rodando || simbolosDisponiveis.length === 0) return;
   rodando = true;
   criarReel();
   limparDestaques();
@@ -76,7 +83,7 @@ function girar() {
 
 function animar() {
   posicao -= velocidade;
-  const larguraReel = (160) * reel.children.length;
+  const larguraReel = 160 * reel.children.length;
 
   if (Math.abs(posicao) >= larguraReel) {
     posicao = 0;
@@ -94,6 +101,7 @@ function animar() {
 }
 
 function parar() {
+  if (!rodando) return;
   rodando = false;
   stopRoletaSound();
 }
@@ -129,6 +137,10 @@ function alinharResultado() {
   document.getElementById('resultado').innerHTML = `Resultado: ${nome}`;
   sorteado.classList.add('highlight');
   adicionarSorteado(nome);
+
+  // Remove item sorteado da lista de disponíveis
+  simbolosDisponiveis = simbolosDisponiveis.filter(item => item.nome !== nome);
+
   playWin();
 }
 
