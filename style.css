@@ -19,28 +19,27 @@ body {
 h1 {
   font-size: 3.5rem;
   font-weight: 900;
-  color: #fff;
-  position: relative;
-  user-select: none;
+  color: #ff4da6; /* rosa vibrante */
   text-transform: uppercase;
   letter-spacing: 4px;
+  user-select: none;
   text-shadow:
-    0 0 5px #00aaff,
+    0 0 5px #9c27b0,
     0 0 10px #00aaff,
     0 0 20px #00aaff,
-    0 0 30px #0099ff,
-    0 0 40px #0099ff,
-    0 0 50px #0077cc,
-    0 0 60px #0077cc;
+    0 0 30px #6a00ff,
+    0 0 40px #6a00ff,
+    0 0 50px #3300ff,
+    0 0 60px #3300ff;
   animation: flicker 3s infinite alternate;
 }
 
 @keyframes flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+  0%, 18%, 22%, 25%, 55%, 100% {
     opacity: 1;
   }
-  20%, 22%, 24%, 55% {
-    opacity: 0.7;
+  20%, 24%, 54% {
+    opacity: 0.6;
   }
 }
 
