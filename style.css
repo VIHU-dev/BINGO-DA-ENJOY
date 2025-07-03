@@ -33,35 +33,14 @@ h1 {
   }
 }
 
-.slot-wrapper {
-  position: relative;
-  width: 620px;
-  margin: 0 auto;
-}
-
 .seta {
-  position: absolute;
-  top: -35px;
-  left: 50%;
-  transform: translateX(-50%);
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-bottom: 30px solid #ff4da6;
-  z-index: 10;
-  transition: transform 0.2s ease;
-}
-
-.seta.girando {
-  animation: tremor 0.3s infinite alternate;
-  transform-origin: 50% 100%;
-}
-
-@keyframes tremor {
-  0% { transform: translateX(-50%) rotate(-10deg); }
-  50% { transform: translateX(-50%) rotate(-20deg); }
-  100% { transform: translateX(-50%) rotate(-10deg); }
+  margin: 0 auto;
+  margin-bottom: -10px;
 }
 
 .slot-machine {
