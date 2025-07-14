@@ -27,7 +27,8 @@ const simbolosOriginais = [
   { src: 'img/Tie.jpg', nome: 'Tie' },
   { src: 'img/T_shirt.jpg', nome: 'T-Shirt' },
   { src: 'img/Underwear.jpg', nome: 'Underwear' },
-  { src: 'img/Vest.jpg', nome: 'Vest' }
+  { src: 'img/Vest.jpg', nome: 'Vest' },
+  { src: 'img/Dress.jpg', nome: 'Dress' }
 ];
 
 let simbolosDisponiveis = [...simbolosOriginais];
